@@ -1,5 +1,1 @@
 <div class="map" id="map" class="match-parent"></div>
-<div *ngFor="let layer of layers">
-    <input type="checkbox" [id]="layer.id" (change)="toggleLayer(layer.id)" [checked]="layer.checked">
-    <label [for]="layer.id">{{ layer.name }}</label>
-</div>

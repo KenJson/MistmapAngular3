@@ -1,26 +1,90 @@
 [
-    "Ancient_Cross.geojson",
-    "Ancient_Mine_Quarry_or_other_Industry.geojson",
-    "Ancient_Temple.geojson",
-    "Ancient_Village_or_Settlement.geojson",
-    "Artificial_Mound.geojson",
-    "Barrow_Cemetery.geojson",
-    "Burial_Chamber_or_Dolmen.geojson",
-    "Cairn.geojson",
-    "Cave_or_Rock_Shelter.geojson",
-    "Chambered_Tomb.geojson",
-    "Hillfort.geojson",
-    "Holed_Stone.geojson",
-    "Misc_Earthwork.geojson",
-    "Modern_Stone_Circle_etc.geojson",
-    "Museum.geojson",
-    "Rock_Art.geojson",
-    "Round_Barrow_s.geojson",
-    "Round_Cairn.geojson",
-    "Sculptured_Stone.geojson",
-    "Standing_Stone_Menhir.geojson",
-    "Standing_Stones.geojson",
-    "Stone_Circle.geojson",
-    "UVG-grid-compiled-by-B-Hagens .geojson",
-    "UVG-grid-compiled-by-B-Hagens.json"
+    {
+        "geojson": "Ancient_Cross.geojson",
+        "icon": "cross.png"
+    },
+    {
+        "geojson": "Ancient_Mine_Quarry_or_other_Industry.geojson",
+        "icon": "mine.png"
+    },
+    {
+        "geojson": "Ancient_Temple.geojson",
+        "icon": "temple.png"
+    },
+    {
+        "geojson": "Ancient_Village_or_Settlement.geojson",
+        "icon": "village.png"
+    },
+    {
+        "geojson": "Artificial_Mound.geojson",
+        "icon": "mountain.png"
+    },
+    {
+        "geojson": "Barrow_Cemetery.geojson",
+        "icon": "cemetery.png"
+    },
+    {
+        "geojson": "Burial_Chamber_or_Dolmen.geojson",
+        "icon": "dolmen.png"
+    },
+    {
+        "geojson": "Cairn.geojson",
+        "icon": "cairn.png"
+    },
+    {
+        "geojson": "Cave_or_Rock_Shelter.geojson",
+        "icon": "cave.png"
+    },
+    {
+        "geojson": "Chambered_Tomb.geojson",
+        "icon": "crypt.png"
+    },
+    {
+        "geojson": "Hillfort.geojson",
+        "icon": "castle-tower.png"
+    },
+    {
+        "geojson": "Holed_Stone.geojson",
+        "icon": "holed stone.png"
+    },
+    {
+        "geojson": "Misc_Earthwork.geojson",
+        "icon": "nazca-lines.png"
+    },
+    {
+        "geojson": "Modern_Stone_Circle_etc.geojson",
+        "icon": "stone circle.png"
+    },
+    {
+        "geojson": "Museum.geojson",
+        "icon": "art-museum.png"
+    },
+    {
+        "geojson": "Rock_Art.geojson",
+        "icon": " cave-painting.png"
+    },
+    {
+        "geojson": "Round_Barrow_s.geojson",
+        "icon": "Round barrow.png"
+    },
+    {
+        "geojson": "Round_Cairn.geojson",
+        "icon": "round cairn.png"
+    },
+    {
+        "geojson": "Sculptured_Stone.geojson",
+        "icon": "sculpture.png"
+    },
+    {
+        "geojson": "Standing_Stone_Menhir.geojson",
+        "icon": "menhir(1).png"
+    },
+    {
+        "geojson": "Standing_Stones.geojson",
+        "icon": "standing stones.png"
+    },
+    {
+        "geojson": "Stone_Circle.geojson",
+        "icon": "stone circle.png"
+    }
 ]

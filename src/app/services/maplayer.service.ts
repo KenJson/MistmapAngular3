@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
+
+
+interface MenhirfestEntry {
+  geojson: string;
+  icon: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +17,10 @@ export class MapLayerService {
 
   constructor(private http: HttpClient) { }
 
-  getManifest(): Observable<string[]> {
-    return this.http.get<string[]>('assets/Menhirfest.json');
+
+
+  getManifest(): Observable<MenhirfestEntry[]> {
+    return this.http.get<MenhirfestEntry[]>('assets/Menhirfest.json');
   }
 
   addSource(map: mapboxgl.Map, id: string, type: any, data: any) {
