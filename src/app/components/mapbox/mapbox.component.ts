@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MapboxkeyService } from '../../services/mapboxkey.service';
 import mapboxgl from 'mapbox-gl';
-
+import { MapLayerService } from '../../services/maplayer.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-mapbox',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule],
   templateUrl: './mapbox.component.html',
   styleUrl: './mapbox.component.scss'
 })
@@ -16,10 +17,10 @@ import mapboxgl from 'mapbox-gl';
 export class MapboxComponent implements OnInit {
   map: mapboxgl.Map | undefined;
   style = 'mapbox://styles/mapbox/streets-v11';
-  lat: number = 30.2672;
-  lng: number = -97.7431;
+  lat: number = 6.1432;
+  lng: number = 46.2044;
 
-  constructor(private mapboxKeyService: MapboxkeyService) { }
+  constructor(private mapboxKeyService: MapboxkeyService, private mapLayerService: MapLayerService) { }
 
   ngOnInit() {
     mapboxgl.accessToken = this.mapboxKeyService.getMapboxKey();
@@ -31,24 +32,20 @@ export class MapboxComponent implements OnInit {
     });
 
     this.map.on('load', () => {
-      this.map?.addSource('earthquakes', {
-        type: 'geojson',
-        // Use a URL for the value for the `data` property.
-        data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
+      this.mapLayerService.getManifest().subscribe(files => {
+        files.forEach(file => {
+          if (this.map) {
+            const id = file.split('.')[0]; // Use the filename without the extension as the ID
+            this.mapLayerService.addSource(this.map, id, 'geojson', `assets/Geojsons/${file}`);
+            this.mapLayerService.addLayer(this.map, id, 'circle', id, {
+              'circle-radius': 4,
+              'circle-stroke-width': 2,
+              'circle-color': 'red',
+              'circle-stroke-color': 'white'
+            });
+          }
+        });
       });
-
-      this.map?.addLayer({
-        'id': 'earthquakes-layer',
-        'type': 'circle',
-        'source': 'earthquakes',
-        'paint': {
-          'circle-radius': 4,
-          'circle-stroke-width': 2,
-          'circle-color': 'red',
-          'circle-stroke-color': 'white'
-        }
-      });
-
     });
   }
 

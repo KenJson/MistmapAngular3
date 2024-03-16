@@ -1,10 +1,5 @@
 <div class="map" id="map" class="match-parent"></div>
-<div>
-    <input type="checkbox" id="earthquakes-layer" (change)="toggleLayer('earthquakes-layer')" checked>
-    <label for="earthquakes-layer">Earthquakes Layer</label>
+<div *ngFor="let layer of layers">
+    <input type="checkbox" [id]="layer.id" (change)="toggleLayer(layer.id)" [checked]="layer.checked">
+    <label [for]="layer.id">{{ layer.name }}</label>
 </div>
-<div>
-    <input type="checkbox" id="austin-hex" (change)="toggleLayer('Austin Hex')" checked>
-    <label for="austin-hex">Austin Hex Layer</label>
-</div>
-<!-- Add more checkboxes for other layers as needed -->
