@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MapboxkeyService } from '../../services/mapboxkey.service';
 import mapboxgl from 'mapbox-gl';
 import { MapLayerService } from '../../services/maplayer.service';
-import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 @Component({
   selector: 'app-mapbox',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [],
   templateUrl: './mapbox.component.html',
   styleUrl: './mapbox.component.scss'
 })
@@ -17,8 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 export class MapboxComponent implements OnInit {
   map: mapboxgl.Map | undefined;
   style = 'mapbox://styles/mapbox/streets-v11';
-  lat: number = 6.1432;
-  lng: number = 46.2044;
+  lat: number = 46.2044;
+  lng: number = 6.1432;
 
   constructor(private mapboxKeyService: MapboxkeyService, private mapLayerService: MapLayerService) { }
 
