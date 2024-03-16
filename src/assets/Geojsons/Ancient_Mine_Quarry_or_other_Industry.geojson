@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Ancient Mine, Quarry or other Industry",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Fuorcla da Strem Sut", "description": "\n        <b>Type:<\/b> Ancient Mine, Quarry or other Industry <b>County\/Region:<\/b> Uri <b>Alt Name:<\/b> Untere Stremlücke <br \/> Pos Accuracy: <b>5<\/b>  Access: <b>2<\/b>  (5 is best)<br \/>\n                    <b>Lat:<\/b> 46.7311 &nbsp;&nbsp;&nbsp;<b>Long<\/b>: 8.7803<img src=\"http:\/\/www.megalithic.co.uk\/a558\/a312\/gallery\/Central_Europe\/Switzerland\/thumb\/WIH_FLs21-725.jpg\" align=\"right\" valign=\"top\"><\/a>\n<br \/>\n                    Ancient Mine, Quarry or other Industry in Uri. The retreating Brunnifirn glacier in the Alps of central Switzerland exposed a rock crystal extraction site exploited during the Early and Late Mesolithi...<b>.<\/b> (c) Meg. Portal contributors.<br \/>\n\t\t     <a href=\"http:\/\/www.megalithic.co.uk\/article.php?sid=56768\" >Link To More Information<\/a><br \/>\n                    " }, "geometry": { "type": "Point", "coordinates": [ 8.7803, 46.7311 ] } }
+]
+}

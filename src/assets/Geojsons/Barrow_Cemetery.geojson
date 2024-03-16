@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Barrow Cemetery",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Zigiholz Grabhügel", "description": "\n        <b>Type:<\/b> Barrow Cemetery <b>County\/Region:<\/b> Aargau <br \/> Pos Accuracy: <b>5<\/b> Condition: <b>3<\/b> (5 is best)   Ambience: <b>4<\/b>  Access: <b>3<\/b>  (5 is best)<br \/>\n                    <b>Lat:<\/b> 47.310113 &nbsp;&nbsp;&nbsp;<b>Long<\/b>: 8.264177<img src=\"http:\/\/www.megalithic.co.uk\/a558\/a312\/gallery\/Central_Europe\/Switzerland\/thumb\/burial_mounds_4_5.jpg\" align=\"right\" valign=\"top\"><\/a>\n<br \/>\n                    Several Tumuli dating to 1400 BCE in woods in Aargau, Switzerland. Page originally by Alex Hunger...<b>.<\/b> (c) Meg. Portal contributors.<br \/>\n\t\t     <a href=\"http:\/\/www.megalithic.co.uk\/article.php?sid=6336114\" >Link To More Information<\/a><br \/>\n                    " }, "geometry": { "type": "Point", "coordinates": [ 8.264177, 47.310113 ] } }
+]
+}

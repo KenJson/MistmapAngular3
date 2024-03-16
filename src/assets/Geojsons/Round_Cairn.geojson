@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Round Cairn",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Colombier Round Tomb", "description": "\n        <b>Type:<\/b> Round Cairn <b>County\/Region:<\/b> Neuenburg <br \/> Pos Accuracy: <b>5<\/b> Condition: <b>4<\/b> (5 is best)   Ambience: <b>4<\/b>  Access: <b>4<\/b>  (5 is best)<br \/>\n                    <b>Lat:<\/b> 47.00673 &nbsp;&nbsp;&nbsp;<b>Long<\/b>: 6.97121<img src=\"http:\/\/www.megalithic.co.uk\/a558\/a312\/gallery\/Central_Europe\/Switzerland\/thumb\/20230809133144_IMG_7997.jpg\" align=\"right\" valign=\"top\"><\/a>\n<br \/>\n                    One of three graves discovered in 2013 in the village of Colombier during the demolition of a restaurant to build a service station in Neuenburg.   The largest of the three contained the remains of a ...<b>.<\/b> (c) Meg. Portal contributors.<br \/>\n\t\t     <a href=\"http:\/\/www.megalithic.co.uk\/article.php?sid=51636\" >Link To More Information<\/a><br \/>\n                    " }, "geometry": { "type": "Point", "coordinates": [ 6.97121, 47.00673 ] } }
+]
+}

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Hillfort",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Heidnisch Biel", "description": "\n        <b>Type:<\/b> Hillfort <b>County\/Region:<\/b> Wallis <b>Alt Name:<\/b> Bielhuegel <br \/> Pos Accuracy: <b>4<\/b> Condition: <b>2<\/b> (5 is best)   Ambience: <b>4<\/b>  Access: <b>4<\/b>  (5 is best)<br \/>\n                    <b>Lat:<\/b> 46.310358 &nbsp;&nbsp;&nbsp;<b>Long<\/b>: 7.810795<br \/>\n                    Hillfort in Wallis. The Heidnisch Biel Hill was a settlement a sanctuary and a Hillfort in different ages. The first traces are leading to the neolithic age 3.500 BCE. At the eastern hillside a cemete...<b>.<\/b> (c) Meg. Portal contributors.<br \/>\n\t\t     <a href=\"http:\/\/www.megalithic.co.uk\/article.php?sid=28425\" >Link To More Information<\/a><br \/>\n                    " }, "geometry": { "type": "Point", "coordinates": [ 7.810795, 46.310358 ] } }
+]
+}

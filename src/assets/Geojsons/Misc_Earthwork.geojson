@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Misc. Earthwork",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Schürmatt block terrace", "description": "\n        <b>Type:<\/b> Misc. Earthwork <b>County\/Region:<\/b> Zürich <b>Alt Name:<\/b> Blockterasse Schürmatt <br \/> Pos Accuracy: <b>5<\/b> Condition: <b>2<\/b> (5 is best)   Ambience: <b>2<\/b>  Access: <b>3<\/b>  (5 is best)<br \/>\n                    <b>Lat:<\/b> 47.26996 &nbsp;&nbsp;&nbsp;<b>Long<\/b>: 8.47496<img src=\"http:\/\/www.megalithic.co.uk\/a558\/a312\/gallery\/Central_Europe\/Switzerland\/thumb\/IMG_20190217_133039_sm.jpg\" align=\"right\" valign=\"top\"><\/a>\n<br \/>\n                    Misc. Earthwork in Zürich. Approximately 150 m southeast of the Schürmatt stone circle is a terraced earthworks on the slope supported by a series of large blocks. No recognizable alignments other tha...<b>.<\/b> (c) Meg. Portal contributors.<br \/>\n\t\t     <a href=\"http:\/\/www.megalithic.co.uk\/article.php?sid=51458\" >Link To More Information<\/a><br \/>\n                    " }, "geometry": { "type": "Point", "coordinates": [ 8.47496, 47.26996 ] } }
+]
+}
