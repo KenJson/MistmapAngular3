@@ -3,6 +3,12 @@ import { MapboxkeyService } from '../../services/mapboxkey.service';
 import mapboxgl from 'mapbox-gl';
 import { MapLayerService } from '../../services/maplayer.service';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { MapboxCtrlsService } from '../../services/mapbox-ctrls.service';
+
+
+//TODO: Régler MapboxDirections. Pas de DefinitlyTyped pour cette librairie apparamment. Ne pas oublier de régler mapbox-ctrls.service.ts également
+
 
 
 interface FeatureProperties {
@@ -14,7 +20,7 @@ interface FeatureProperties {
 @Component({
   selector: 'app-mapbox',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IonicModule],
   templateUrl: './mapbox.component.html',
   styleUrl: './mapbox.component.scss'
 })
@@ -28,11 +34,15 @@ export class MapboxComponent implements OnInit {
   lat: number = 46.2044;
   lng: number = 6.1432;
 
-  constructor(private mapboxKeyService: MapboxkeyService, private mapLayerService: MapLayerService) { }
+
+
+  constructor(
+    private mapboxKeyService: MapboxkeyService,
+    private mapLayerService: MapLayerService,
+    private mapboxCtrlsService: MapboxCtrlsService
+  ) { }
 
   getIconNameForLayer(layerId: string): string {
-    // Add your logic here to determine the icon name based on the layer ID
-    // For now, we'll just return the layer ID, assuming that the icon has the same name as the layer
     return layerId;
   }
 
@@ -45,12 +55,17 @@ export class MapboxComponent implements OnInit {
       center: [this.lng, this.lat]
     });
 
+    this.mapboxCtrlsService.addNavigationControl(this.map, 'top-right');
+    this.mapboxCtrlsService.addGeolocateControl(this.map, 'top-right');
+    // Uncomment this if you have the MapboxDirections module
+    // this.mapboxCtrlsService.addDirectionsControl(this.map, 'top-left');
 
     this.map.on('load', () => {
       this.maploaded = true
       this.mapLayerService.getManifest().subscribe(manifest => {
         manifest.forEach(entry => {
           if (this.map) {
+            //    this.mapboxDirectionsService.initialize(this.map, mapboxgl.accessToken);
             const id = entry.geojson.split('.')[0]; // Use the filename without the extension as the ID
             this.mapLayerService.addSource(this.map, id, 'geojson', `assets/Geojsons/${entry.geojson}`);
 
@@ -90,11 +105,43 @@ export class MapboxComponent implements OnInit {
                   }
                 });
 
+
               }
             });
           }
         });
       });
+
+      /*  // Add navigation control to the map
+        const nav = new mapboxgl.NavigationControl();
+        if (this.map) {
+          this.map.addControl(nav, 'top-right');
+        }
+  */
+
+      // Add directions control to the map
+      /* const directions = new MapboxDirections({
+         accessToken: mapboxgl.accessToken,
+         unit: 'metric',
+ 
+       });
+       if (this.map) {
+         this.map.addControl(directions, 'top-left');
+       }
+       */
+
+      /*
+     // Add geolocate control to the map
+     const geolocate = new mapboxgl.GeolocateControl({
+       positionOptions: {
+         enableHighAccuracy: true
+       },
+       trackUserLocation: true
+     });
+     if (this.map) {
+       this.map.addControl(geolocate, 'top-right');
+     }
+*/
     });
   };
 }

@@ -41,14 +41,17 @@ export class MapLayerService {
 
   addSourcesAndLayers(map: mapboxgl.Map) {
     map.on('load', () => {
-      this.addSource(map, 'earthquakes', 'geojson', 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson');
-      this.addLayer(map, 'earthquakes-layer', 'circle', 'earthquakes', {
-        'circle-radius': 4,
-        'circle-stroke-width': 2,
-        'circle-color': 'red',
-        'circle-stroke-color': 'white'
-      });
 
+      /*
+        this.addSource(map, 'earthquakes', 'geojson', 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson');
+        this.addLayer(map, 'earthquakes-layer', 'circle', 'earthquakes', {
+          'circle-radius': 4,
+          'circle-stroke-width': 2,
+          'circle-color': 'red',
+          'circle-stroke-color': 'white'
+          
+        });
+  */
 
     });
   }
