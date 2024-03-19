@@ -1,14 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { MapboxkeyService } from '../../services/mapboxkey.service';
-import mapboxgl from 'mapbox-gl';
-import { MapLayerService } from '../../services/maplayer.service';
 import { CommonModule } from '@angular/common';
+import mapboxgl from 'mapbox-gl';
 import { IonicModule } from '@ionic/angular';
+import { MapboxkeyService } from '../../services/mapboxkey.service';
+import { MapLayerService } from '../../services/maplayer.service';
 import { MapboxCtrlsService } from '../../services/mapbox-ctrls.service';
+import { RadiusService } from '../../services/radius.service';
+import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
+import { HttpClient } from '@angular/common/http';
 
+/*
+// ts-ignore pour éviter l'erreur de compilation
+// @ts-ignore
+import { MapboxDirections } from '@mapbox/mapbox-gl-directions';
+*/
 
 //TODO: Régler MapboxDirections. Pas de DefinitlyTyped pour cette librairie apparamment. Ne pas oublier de régler mapbox-ctrls.service.ts également
-
+// récup package.json et faire un npm install (récup liste des dépendances) (dependencies et devDependencies)
+//TODO: Profil personnel, avec caméra avatar, avec enregistrement de points favoris, achievments 
+//(faire un guard qu'on met sur le routeur pour vérifier si l'utilisateur est connecté)
+//TODO: Lignes telluriques, anomalies gravit + electromagn. 
 
 
 interface FeatureProperties {
@@ -16,11 +27,17 @@ interface FeatureProperties {
   description: string;
 }
 
+interface Point {
+  lat: number;
+  lng: number;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-mapbox',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule,],
   templateUrl: './mapbox.component.html',
   styleUrl: './mapbox.component.scss'
 })
@@ -36,10 +53,74 @@ export class MapboxComponent implements OnInit {
 
 
 
+  private points: { lat: number, lng: number, name: string }[] = [];
+
+  //a mettre dans un autre compartiment
+
+  showNearbyPoints(map: mapboxgl.Map | undefined) {
+    if (!map) {
+      console.error('Map is not initialized');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+
+      // Get the list of points from your MapLayerService
+      this.mapLayerService.getManifest().subscribe(manifestEntries => {
+        // For each entry in the manifest, load the corresponding GeoJSON file
+        manifestEntries.forEach((entry, index) => {
+
+          const url = `assets/Geojsons/${entry.geojson}`;
+
+
+          // Load the GeoJSON file
+          this.http.get(url).subscribe((geojson: any) => {
+            // Add the points from the GeoJSON file to the points array
+            this.points.push(...geojson.features.map((feature: any) => ({
+              lat: feature.geometry.coordinates[1],
+              lng: feature.geometry.coordinates[0],
+              name: feature.properties ? feature.properties.Name : 'Unknown'
+            })));
+
+            // Get the points within the radius
+            const pointsWithinRadius = this.pointsWithinRadiusPipe.transform(this.points, center, 10);
+            console.log(this.points, pointsWithinRadius);
+
+            const pointsList = pointsWithinRadius.map(point => `<li>${point.name}</li>`).join('');
+
+
+
+            if (pointsList.length > 0) {
+
+              new mapboxgl.Popup()
+                .setLngLat(center)
+                .setHTML(`<ul>${pointsList}</ul>`)
+                .addTo(map);
+            } else {
+              console.log('No points within the radius');
+            }
+          });
+        });
+
+
+
+      });
+
+    });
+  }
+  private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
+
   constructor(
+    private http: HttpClient,
     private mapboxKeyService: MapboxkeyService,
     private mapLayerService: MapLayerService,
-    private mapboxCtrlsService: MapboxCtrlsService
+    private mapboxCtrlsService: MapboxCtrlsService,
+    private radiusService: RadiusService,
+
   ) { }
 
   getIconNameForLayer(layerId: string): string {
@@ -57,8 +138,10 @@ export class MapboxComponent implements OnInit {
 
     this.mapboxCtrlsService.addNavigationControl(this.map, 'top-right');
     this.mapboxCtrlsService.addGeolocateControl(this.map, 'top-right');
+    /*
     // Uncomment this if you have the MapboxDirections module
-    // this.mapboxCtrlsService.addDirectionsControl(this.map, 'top-left');
+    this.mapboxCtrlsService.addDirectionsControl(this.map, 'top-left');
+*/
 
     this.map.on('load', () => {
       this.maploaded = true
@@ -89,9 +172,9 @@ export class MapboxComponent implements OnInit {
                 });
 
                 this.map.on('click', id, (e) => {
-                  // Check that e.features is defined and has at least one element
+
                   if (e.features && e.features.length > 0) {
-                    // Create a new popup and set its coordinates and HTML content
+
                     const properties = e.features[0].properties as FeatureProperties;
                     if (this.map) {
                       new mapboxgl.Popup()
@@ -112,6 +195,8 @@ export class MapboxComponent implements OnInit {
         });
       });
 
+
+
       /*  // Add navigation control to the map
         const nav = new mapboxgl.NavigationControl();
         if (this.map) {
@@ -123,7 +208,7 @@ export class MapboxComponent implements OnInit {
       /* const directions = new MapboxDirections({
          accessToken: mapboxgl.accessToken,
          unit: 'metric',
- 
+   
        });
        if (this.map) {
          this.map.addControl(directions, 'top-left');
@@ -141,9 +226,11 @@ export class MapboxComponent implements OnInit {
      if (this.map) {
        this.map.addControl(geolocate, 'top-right');
      }
-*/
+  */
     });
   };
+
+
 }
 
 

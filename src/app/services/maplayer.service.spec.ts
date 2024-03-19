@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MaplayerService } from './maplayer.service';
+import { MapLayerService } from './maplayer.service';
 
 describe('MaplayerService', () => {
-  let service: MaplayerService;
+  let service: MapLayerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MaplayerService);
+    service = TestBed.inject(MapLayerService);
   });
 
   it('should be created', () => {

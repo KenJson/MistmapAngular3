@@ -1,7 +1,10 @@
 
 import { Injectable } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-
+/*
+// @ts-ignore
+import MapboxDirections from '@mapbox/mapbox-gl-directions';
+*/
 
 type ControlPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
@@ -9,6 +12,8 @@ type ControlPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
   providedIn: 'root'
 })
 export class MapboxCtrlsService {
+
+
 
   constructor() { }
 
@@ -29,12 +34,12 @@ export class MapboxCtrlsService {
 
   // Uncomment this if you have the MapboxDirections module
   /*
-  addDirectionsControl(map: mapboxgl.Map, position: ControlPosition) {
-    const directions = new MapboxDirections({
-      accessToken: mapboxgl.accessToken,
-      unit: 'metric',
-    });
-    map.addControl(directions, position);
-  }
+    addDirectionsControl(map: mapboxgl.Map, position: ControlPosition) {
+      const directions = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        unit: 'metric',
+      });
+      map.addControl(directions, position);
+    }
   */
 }
