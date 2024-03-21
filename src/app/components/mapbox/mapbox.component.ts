@@ -17,22 +17,22 @@ import { Observable } from 'rxjs';
 import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
 import { Auth, authState, user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
-
-
-
+import { heart } from 'ionicons/icons';
 
 
 /*
 // ts-ignore pour éviter l'erreur de compilation
 // @ts-ignore
 import { MapboxDirections } from '@mapbox/mapbox-gl-directions'; 
+import { IonIcon2 } from 'ionicons';
+import { addIcons } from 'ionicons/icons';
 mapbox ctrls executé deux fois potentiellement
 */
 
 //TODO: Régler MapboxDirections. Pas de DefinitlyTyped pour cette librairie apparamment. Ne pas oublier de régler mapbox-ctrls.service.ts également
 // récup package.json et faire un npm install (récup liste des dépendances) (dependencies et devDependencies)
 
-//TODO: Profil personnel, avec caméra avatar (camera existe), avec enregistrement de points favoris, achievments 
+//TODO: Profil personnel , avec caméra avatar (camera existe), avec enregistrement de points favoris, achievments 
 //(faire un guard qu'on met sur le routeur pour vérifier si l'utilisateur est connecté)
 //TODO: Lignes telluriques, anomalies gravit + electromagn. (extra layers. a faire en dernier)
 
@@ -55,6 +55,7 @@ interface Point {
   imports: [
     CommonModule,
     IonicModule,
+
 
 
 
@@ -144,9 +145,9 @@ export class MapboxComponent implements OnInit {
     private mapLayerService: MapLayerService,
     private mapboxCtrlsService: MapboxCtrlsService,
     private radiusService: RadiusService,
-
     private readonly _firestore: Firestore,
-    private readonly _auth: Auth
+    private readonly _auth: Auth,
+
   ) { }
 
   getIconNameForLayer(layerId: string): string {
@@ -210,6 +211,7 @@ const datas = collectionData(q, { idField: 'id' });
     const analytics = getAnalytics(app);
     this.mapboxCtrlsService.addNavigationControl(this.map, 'top-right');
     this.mapboxCtrlsService.addGeolocateControl(this.map, 'top-right');
+
     /*
     // Uncomment this if you have the MapboxDirections module
     this.mapboxCtrlsService.addDirectionsControl(this.map, 'top-left');
@@ -265,15 +267,14 @@ const datas = collectionData(q, { idField: 'id' });
             });
           }
         });
+
+
+
       });
 
 
 
-      // Add navigation control to the map
-      const nav = new mapboxgl.NavigationControl();
-      if (this.map) {
-        this.map.addControl(nav, 'top-right');
-      }
+
 
       /*
             // Add directions control to the map
@@ -288,16 +289,7 @@ const datas = collectionData(q, { idField: 'id' });
           
       */
 
-      // Add geolocate control to the map
-      const geolocate = new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      });
-      if (this.map) {
-        this.map.addControl(geolocate, 'top-right');
-      }
+
 
     });
   };

@@ -1,17 +1,54 @@
-<div class="map" id="map" class="match-parent"></div>
+<div class="map" id="map" class="match-parent">
 
-<ion-content>
-    <ion-checkbox>J'accepte de donner une crêpe à Kenji</ion-checkbox>
+    <!-- <div class="mapboxgl-ctrl-bottom-right">  </div>-->
 
-    <ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
+    <ion-content>
+        <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="Ionicfablist">
+            <ion-fab-button>
+                <ion-icon></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+                <ion-fab-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()">
+                    <ion-icon src="src/assets/ionicons.designerpack/logo-google.svg">Login</ion-icon>
+                </ion-fab-button>
 
-
-    <ion-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()">
-        Sign In with Google
+                <ion-fab-button *ngIf="isLoggedIn" (click)="logout()">
+                    <ion-icon size="large" src="./assets/ionicons.designerpack/log-out-outline.svg">Logout</ion-icon>
+                </ion-fab-button>
+            </ion-fab-list>
+        </ion-fab>
+    </ion-content>
+    <ion-button aria-label="Favorite">
+        <ion-icon name="heart" aria-hidden="true"></ion-icon>
     </ion-button>
+</div>
 
-    <ion-button *ngIf="isLoggedIn" (click)="logout()">
-        Logout
+
+
+
+<ion-checkbox>J'accepte de donner une crêpe à Kenji</ion-checkbox>
+
+<ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
+
+
+<ion-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()">
+    Sign In with Google
+</ion-button>
+
+
+
+
+
+
+<ion-button *ngIf="isLoggedIn" (click)="logout()">
+    Logout
+</ion-button>
+
+
+
+
+<!--
+    <ion-button *ngIf="isLoggedIn" (click)="profile()">
+        Profil
     </ion-button>
-
-</ion-content>
+-->

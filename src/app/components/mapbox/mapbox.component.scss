@@ -1,4 +1,18 @@
+.body {
+    margin: 0;
+    padding: 0;
+
+}
+
 .match-parent {
-    width: 100%;
-    height: 1080px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.Ionicfablist {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    z-index: 1000;
 }
