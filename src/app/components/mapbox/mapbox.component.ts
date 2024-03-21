@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import mapboxgl from 'mapbox-gl';
 import { IonicModule } from '@ionic/angular';
@@ -9,17 +9,32 @@ import { RadiusService } from '../../services/radius.service';
 import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
 import { HttpClient } from '@angular/common/http';
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { RouterOutlet } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
+import { Auth, user } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
+
+
+
+
+
 /*
 // ts-ignore pour éviter l'erreur de compilation
 // @ts-ignore
-import { MapboxDirections } from '@mapbox/mapbox-gl-directions';
+import { MapboxDirections } from '@mapbox/mapbox-gl-directions'; 
+mapbox ctrls executé deux fois potentiellement
 */
 
 //TODO: Régler MapboxDirections. Pas de DefinitlyTyped pour cette librairie apparamment. Ne pas oublier de régler mapbox-ctrls.service.ts également
 // récup package.json et faire un npm install (récup liste des dépendances) (dependencies et devDependencies)
-//TODO: Profil personnel, avec caméra avatar, avec enregistrement de points favoris, achievments 
+
+//TODO: Profil personnel, avec caméra avatar (camera existe), avec enregistrement de points favoris, achievments 
 //(faire un guard qu'on met sur le routeur pour vérifier si l'utilisateur est connecté)
-//TODO: Lignes telluriques, anomalies gravit + electromagn. 
+//TODO: Lignes telluriques, anomalies gravit + electromagn. (extra layers. a faire en dernier)
 
 
 interface FeatureProperties {
@@ -37,10 +52,17 @@ interface Point {
 @Component({
   selector: 'app-mapbox',
   standalone: true,
-  imports: [CommonModule, IonicModule,],
+  imports: [
+    CommonModule,
+    IonicModule,
+
+
+
+  ],
   templateUrl: './mapbox.component.html',
   styleUrl: './mapbox.component.scss'
 })
+
 
 
 export class MapboxComponent implements OnInit {
@@ -55,7 +77,7 @@ export class MapboxComponent implements OnInit {
 
   private points: { lat: number, lng: number, name: string }[] = [];
 
-  //a mettre dans un autre compartiment
+
 
   showNearbyPoints(map: mapboxgl.Map | undefined) {
     if (!map) {
@@ -114,6 +136,7 @@ export class MapboxComponent implements OnInit {
   }
   private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
 
+
   constructor(
     private http: HttpClient,
     private mapboxKeyService: MapboxkeyService,
@@ -121,14 +144,53 @@ export class MapboxComponent implements OnInit {
     private mapboxCtrlsService: MapboxCtrlsService,
     private radiusService: RadiusService,
 
+    private readonly _firestore: Firestore,
+    private readonly _auth: Auth
   ) { }
 
   getIconNameForLayer(layerId: string): string {
     return layerId;
   }
 
+  //Firebase Authentification (checker si le pack est bien installé. problème avec collection.json introuvable)
+  async signInWithGoogle(): Promise<void> {
+    const provider = new GoogleAuthProvider();
+    const credential = await signInWithPopup(this._auth, provider);
+  }
+
+  async logout(): Promise<void> { await signOut(this._auth); }
+
+  authState(): Observable<User | null> {
+    return user(this._auth);
+  }
+
+
+  /*
+//gestion des données avec Cloud Firestore
+@param uid
+loadTodo(uid: string): void {
+const fbCollection = collection(this._firestore, 'demo-todos');
+const limitTo: QueryConstraint = limit(10);
+const isTodo: QueryConstraint = where('done', '==', false);
+const byUserId: QueryConstraint = where('userId', '==', uid);
+const query: Query = query(fbCollection, isTodo, byUserId, limitTo);
+const datas = collectionData(q, { idField: 'id' });
+}
+*/
+
+  private firebaseConfig = {
+    apiKey: "AIzaSyBqHkgxgreoLEV3A_lk6NnSVpnHb82qKiY",
+    authDomain: "mistmap-angu.firebaseapp.com",
+    projectId: "mistmap-angu",
+    storageBucket: "mistmap-angu.appspot.com",
+    messagingSenderId: "1035644163878",
+    appId: "1:1035644163878:web:b96e8f2b415ebcf01cd3e7",
+    measurementId: "G-GGHJLRSPJ0"
+  };
+
   ngOnInit() {
     mapboxgl.accessToken = this.mapboxKeyService.getMapboxKey();
+
     this.map = new mapboxgl.Map({
       container: 'map',
       style: this.style,
@@ -136,6 +198,8 @@ export class MapboxComponent implements OnInit {
       center: [this.lng, this.lat]
     });
 
+    const app = initializeApp(this.firebaseConfig);
+    const analytics = getAnalytics(app);
     this.mapboxCtrlsService.addNavigationControl(this.map, 'top-right');
     this.mapboxCtrlsService.addGeolocateControl(this.map, 'top-right');
     /*
@@ -197,36 +261,36 @@ export class MapboxComponent implements OnInit {
 
 
 
-      /*  // Add navigation control to the map
-        const nav = new mapboxgl.NavigationControl();
-        if (this.map) {
-          this.map.addControl(nav, 'top-right');
-        }
-  */
-
-      // Add directions control to the map
-      /* const directions = new MapboxDirections({
-         accessToken: mapboxgl.accessToken,
-         unit: 'metric',
-   
-       });
-       if (this.map) {
-         this.map.addControl(directions, 'top-left');
-       }
-       */
+      // Add navigation control to the map
+      const nav = new mapboxgl.NavigationControl();
+      if (this.map) {
+        this.map.addControl(nav, 'top-right');
+      }
 
       /*
-     // Add geolocate control to the map
-     const geolocate = new mapboxgl.GeolocateControl({
-       positionOptions: {
-         enableHighAccuracy: true
-       },
-       trackUserLocation: true
-     });
-     if (this.map) {
-       this.map.addControl(geolocate, 'top-right');
-     }
-  */
+            // Add directions control to the map
+           const directions = new MapboxDirections({
+               accessToken: mapboxgl.accessToken,
+               unit: 'metric',
+         
+             });
+             if (this.map) {
+               this.map.addControl(directions, 'top-left');
+             }
+          
+      */
+
+      // Add geolocate control to the map
+      const geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      });
+      if (this.map) {
+        this.map.addControl(geolocate, 'top-right');
+      }
+
     });
   };
 
