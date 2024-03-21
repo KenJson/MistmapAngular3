@@ -4,7 +4,14 @@
     <ion-checkbox>J'accepte de donner une crêpe à Kenji</ion-checkbox>
 
     <ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
-    <ion-button (click)="signInWithGoogle()">Signin with Google</ion-button>
 
+
+    <ion-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()">
+        Sign In with Google
+    </ion-button>
+
+    <ion-button *ngIf="isLoggedIn" (click)="logout()">
+        Logout
+    </ion-button>
 
 </ion-content>

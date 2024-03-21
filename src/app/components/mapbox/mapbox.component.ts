@@ -15,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
-import { Auth, user } from '@angular/fire/auth';
+import { Auth, authState, user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 
 
@@ -72,6 +72,7 @@ export class MapboxComponent implements OnInit {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat: number = 46.2044;
   lng: number = 6.1432;
+  isLoggedIn: boolean = false;
 
 
 
@@ -165,6 +166,8 @@ export class MapboxComponent implements OnInit {
   }
 
 
+
+
   /*
 //gestion des données avec Cloud Firestore
 @param uid
@@ -190,6 +193,11 @@ const datas = collectionData(q, { idField: 'id' });
 
   ngOnInit() {
     mapboxgl.accessToken = this.mapboxKeyService.getMapboxKey();
+
+    this.authState().subscribe((user) => {
+      this.isLoggedIn = !!user;
+    });
+
 
     this.map = new mapboxgl.Map({
       container: 'map',
