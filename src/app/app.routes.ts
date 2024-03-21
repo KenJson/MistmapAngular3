@@ -5,7 +5,7 @@ import { ProfilepageComponent } from './components/profilepage/profilepage.compo
 
 export const routes: Routes = [
     { path: 'map', component: MapboxComponent },
-    { path: 'profilepage', component: ProfilepageComponent },
+    { path: '/profilepage', component: ProfilepageComponent },
     { path: '', redirectTo: '/map', pathMatch: 'full' }
 ];
 
