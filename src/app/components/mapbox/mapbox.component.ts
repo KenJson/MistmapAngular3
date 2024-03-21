@@ -8,7 +8,6 @@ import { MapboxCtrlsService } from '../../services/mapbox-ctrls.service';
 import { RadiusService } from '../../services/radius.service';
 import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
 import { HttpClient } from '@angular/common/http';
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { RouterOutlet } from '@angular/router';
@@ -17,13 +16,13 @@ import { Observable } from 'rxjs';
 import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
 import { Auth, authState, user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
-import { heart } from 'ionicons/icons';
+
 
 
 /*
 // ts-ignore pour éviter l'erreur de compilation
 // @ts-ignore
-import { MapboxDirections } from '@mapbox/mapbox-gl-directions'; 
+ 
 import { IonIcon2 } from 'ionicons';
 import { addIcons } from 'ionicons/icons';
 mapbox ctrls executé deux fois potentiellement

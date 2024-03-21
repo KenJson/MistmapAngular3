@@ -1,7 +1,7 @@
 <ion-button class="positionbutton" (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
 <div class="map" id="map" class="match-parent">
 
-
+    <!-- src/assets/ionicons.designerpack/layers-outline.svg -->
 
     <ion-content>
         <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="Ionicfablist">
@@ -9,11 +9,11 @@
                 <ion-icon></ion-icon>
             </ion-fab-button>
             <ion-fab-list side="top">
-                <ion-fab-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()">
-                    <ion-icon src="src/assets/ionicons.designerpack/logo-google.svg">Login</ion-icon>
+                <ion-fab-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()" color="primary">
+                    <ion-icon src="./assets/ionicons.designerpack/logo-google.svg">Login</ion-icon>
                 </ion-fab-button>
 
-                <ion-fab-button *ngIf="isLoggedIn" (click)="logout()">
+                <ion-fab-button *ngIf="isLoggedIn" (click)="logout()" color="primary">
                     <ion-icon size="large" src="./assets/ionicons.designerpack/log-out-outline.svg">Logout</ion-icon>
                 </ion-fab-button>
             </ion-fab-list>
