@@ -1,6 +1,7 @@
+<ion-button class="positionbutton" (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
 <div class="map" id="map" class="match-parent">
 
-    <!-- <div class="mapboxgl-ctrl-bottom-right">  </div>-->
+
 
     <ion-content>
         <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="Ionicfablist">
@@ -18,31 +19,20 @@
             </ion-fab-list>
         </ion-fab>
     </ion-content>
-    <ion-button aria-label="Favorite">
-        <ion-icon name="heart" aria-hidden="true"></ion-icon>
-    </ion-button>
+
 </div>
 
 
 
 
-<ion-checkbox>J'accepte de donner une crêpe à Kenji</ion-checkbox>
 
 <ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
 
 
-<ion-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()">
-    Sign In with Google
-</ion-button>
 
 
 
 
-
-
-<ion-button *ngIf="isLoggedIn" (click)="logout()">
-    Logout
-</ion-button>
 
 
 

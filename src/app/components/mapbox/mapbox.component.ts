@@ -55,10 +55,6 @@ interface Point {
   imports: [
     CommonModule,
     IonicModule,
-
-
-
-
   ],
   templateUrl: './mapbox.component.html',
   styleUrl: './mapbox.component.scss'

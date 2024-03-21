@@ -1,13 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { Routes } from '@angular/router';
 import { MapboxComponent } from './components/mapbox/mapbox.component';
+import { ProfilepageComponent } from './components/profilepage/profilepage.component';
 
-export const routes: Routes = [{ path: 'map', component: MapboxComponent },];
+export const routes: Routes = [
+    { path: 'map', component: MapboxComponent },
+    { path: 'profilepage', component: ProfilepageComponent }
+];
 
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-})
 
 export class AppRoutingModule { }
