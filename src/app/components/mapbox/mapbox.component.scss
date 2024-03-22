@@ -29,7 +29,17 @@
     z-index: -1;
 }
 
-.map {}
+.layeraccordion {
+
+    top: 5px;
+
+    z-index: 1000;
+}
+
+.nearbypoints {
+    right: 45px;
+    top: 5px;
+}
 
 :host {
     .map {

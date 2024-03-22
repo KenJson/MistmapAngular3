@@ -1,10 +1,8 @@
-<!-- src/assets/ionicons.designerpack/layers-outline.svg -->
-
 <ion-content>
 
-    <ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
 
-    <ion-accordion-group>
+
+    <ion-accordion-group slot="fixed" vertical="top" horizontal="end" color="primary" class="layeraccordion">
         <ion-accordion value="first">
             <ion-item slot="header" color="light">
                 <ion-icon src="./assets/ionicons.designerpack/layers-outline.svg"></ion-icon>
@@ -51,15 +49,8 @@
 
     </ion-accordion-group>
 
-    <!--
-        <ion-accordion class="positionbutton">
-            <ion-item slot="header" color="light">
-                <ion-label>Layers</ion-label>
-            </ion-item>
-            
-        </ion-accordion>
-    </ion-accordion-group>
--->
+    <ion-button slot="fixed" vertical="top" (click)="showNearbyPoints(map)" class="nearbypoints">Nearby
+        Sites</ion-button>
 
 
     <div class="map match-parent" id="map" style="color: black;"></div>
@@ -71,11 +62,9 @@
         </ion-fab-button>
         <ion-fab-list side="top">
 
-            <ion-fab-button *ngIf="isLoggedIn" (click)="goToProfile()" color="primary">
+            <ion-fab-button *ngIf="isLoggedIn" (click)="goToProfile()" value="first" color="primary">
                 <ion-icon size="large" src="./assets/ionicons.designerpack/copy.svg">Profile</ion-icon>
             </ion-fab-button>
-
-
 
             <ion-fab-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()" color="primary">
                 <ion-icon src="./assets/ionicons.designerpack/logo-google.svg">Login</ion-icon>
