@@ -28,7 +28,9 @@ export class MapLayerService {
       type: type,
       data: data
     });
+
   }
+
 
   addLayer(map: mapboxgl.Map, id: string, type: any, source: string, paint: any) {
     map.addLayer({

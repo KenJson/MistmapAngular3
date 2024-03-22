@@ -13,7 +13,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./profilepage.component.scss'],
 })
 export class ProfilepageComponent implements OnInit {
-
+  goToMap() {
+    this.router.navigate(['/map']);
+  }
   constructor(private router: Router) { }
 
   ngOnInit() { }

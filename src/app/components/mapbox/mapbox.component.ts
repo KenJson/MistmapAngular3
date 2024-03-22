@@ -18,6 +18,7 @@ import { Auth, authState, user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { LayerToggleService } from '../../services/layer-toggle.service';
+import { LeylineService } from '../../services/leyline.service';
 
 
 
@@ -72,7 +73,7 @@ export class MapboxComponent implements OnInit {
   lat: number = 46.2044;
   lng: number = 6.1432;
   isLoggedIn: boolean = false;
-
+  public loaded = false;
 
 
   private points: { lat: number, lng: number, name: string }[] = [];
@@ -155,7 +156,8 @@ export class MapboxComponent implements OnInit {
     private readonly _firestore: Firestore,
     private readonly _auth: Auth,
     private router: Router,
-    private layerToggleService: LayerToggleService
+    private layerToggleService: LayerToggleService,
+    private leylineService: LeylineService
   ) { }
 
   getIconNameForLayer(layerId: string): string {
@@ -215,6 +217,7 @@ const datas = collectionData(q, { idField: 'id' });
       center: [this.lng, this.lat]
     });
 
+    this.leylineService.setMap(this.map);
     const app = initializeApp(this.firebaseConfig);
     const analytics = getAnalytics(app);
     this.mapboxCtrlsService.addNavigationControl(this.map, 'top-right');
@@ -258,6 +261,7 @@ const datas = collectionData(q, { idField: 'id' });
                   if (e.features && e.features.length > 0) {
 
                     const properties = e.features[0].properties as FeatureProperties;
+
                     if (this.map) {
                       new mapboxgl.Popup()
                         .setLngLat(e.lngLat)
@@ -306,10 +310,28 @@ const datas = collectionData(q, { idField: 'id' });
     });
   };
 
+  loadLeyline(filename: string) {
+    this.leylineService.loadGeojson(filename).then(() => {
+      console.log('Leyline loaded');
+    }).catch(err => {
+      console.error(err);
+    });
+  }
+
   onToggleLayer(name: string): void {
     // Use the service to toggle layer visibility
     this.layerToggleService.toggleLayerVisibility(this.map, name);
   }
+
+
+
+  moveLayerToTop(layerId: string) {
+    if (this.map && this.map.getLayer(layerId)) {
+      this.map.moveLayer(layerId);
+    }
+  }
+
+
 
   ngOnDestroy() {
     if (this.map) {
