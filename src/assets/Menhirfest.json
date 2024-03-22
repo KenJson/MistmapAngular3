@@ -61,7 +61,7 @@
     },
     {
         "geojson": "Rock_Art.geojson",
-        "icon": " cavepainting.png"
+        "icon": "cavepainting.png"
     },
     {
         "geojson": "Round_Barrow_s.geojson",

@@ -16,6 +16,8 @@ import { Observable } from 'rxjs';
 import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
 import { Auth, authState, user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { LayerToggleService } from '../../services/layer-toggle.service';
 
 
 
@@ -75,7 +77,9 @@ export class MapboxComponent implements OnInit {
 
   private points: { lat: number, lng: number, name: string }[] = [];
 
-
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
 
   showNearbyPoints(map: mapboxgl.Map | undefined) {
     if (!map) {
@@ -100,11 +104,18 @@ export class MapboxComponent implements OnInit {
           // Load the GeoJSON file
           this.http.get(url).subscribe((geojson: any) => {
             // Add the points from the GeoJSON file to the points array
-            this.points.push(...geojson.features.map((feature: any) => ({
-              lat: feature.geometry.coordinates[1],
-              lng: feature.geometry.coordinates[0],
-              name: feature.properties ? feature.properties.Name : 'Unknown'
-            })));
+            this.points.push(...geojson.features
+              .filter((feature: any) => {
+                // Add your filter condition here
+
+                return feature.properties && feature.properties.name === 'Ancient Village or Settlement';
+              })
+
+              .map((feature: any) => ({
+                lat: feature.geometry.coordinates[1],
+                lng: feature.geometry.coordinates[0],
+                name: feature.properties ? feature.properties.Name : 'Unknown'
+              })));
 
             // Get the points within the radius
             const pointsWithinRadius = this.pointsWithinRadiusPipe.transform(this.points, center, 10);
@@ -143,7 +154,8 @@ export class MapboxComponent implements OnInit {
     private radiusService: RadiusService,
     private readonly _firestore: Firestore,
     private readonly _auth: Auth,
-
+    private router: Router,
+    private layerToggleService: LayerToggleService
   ) { }
 
   getIconNameForLayer(layerId: string): string {
@@ -242,7 +254,7 @@ const datas = collectionData(q, { idField: 'id' });
                 });
 
                 this.map.on('click', id, (e) => {
-
+                  console.log('Feature clicked:', e);
                   if (e.features && e.features.length > 0) {
 
                     const properties = e.features[0].properties as FeatureProperties;
@@ -252,8 +264,10 @@ const datas = collectionData(q, { idField: 'id' });
                         .setHTML(`
                           <h3>${properties.Name}</h3>
                           <p>${properties.description}</p>
+                          
                         `)
                         .addTo(this.map);
+
                     }
                   }
                 });
@@ -262,7 +276,9 @@ const datas = collectionData(q, { idField: 'id' });
               }
             });
           }
-        });
+        }
+
+        );
 
 
 
@@ -290,7 +306,16 @@ const datas = collectionData(q, { idField: 'id' });
     });
   };
 
+  onToggleLayer(name: string): void {
+    // Use the service to toggle layer visibility
+    this.layerToggleService.toggleLayerVisibility(this.map, name);
+  }
 
+  ngOnDestroy() {
+    if (this.map) {
+      this.map.remove();
+    }
+  }
 }
 
 

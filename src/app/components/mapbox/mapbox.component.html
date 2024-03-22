@@ -1,32 +1,105 @@
-<ion-button class="positionbutton" (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
-<div class="map" id="map" class="match-parent">
+<!-- src/assets/ionicons.designerpack/layers-outline.svg -->
 
-    <!-- src/assets/ionicons.designerpack/layers-outline.svg -->
+<ion-content>
 
-    <ion-content>
-        <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="Ionicfablist">
-            <ion-fab-button>
-                <ion-icon></ion-icon>
+    <ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
+
+    <ion-accordion-group>
+        <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+                <ion-icon src="./assets/ionicons.designerpack/layers-outline.svg"></ion-icon>
+                <ion-label>Layers</ion-label>
+            </ion-item>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Ancient Cross')">Ancient Cross</ion-button>
+            <ion-button slot="content" size="small"
+                (click)="onToggleLayer('Ancient Mine Quarry or other Industry')">Ancient Mine Quarry or other
+                Industry</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Ancient Temple')">Ancient
+                Temple</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Ancient Village or Settlement')">Ancient
+                Village or Settlement</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Artificial Mound')">Artificial
+                Mound</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Barrow Cemetery')">Barrow
+                Cemetery</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Burial Chamber or Dolmen')">Burial Chamber
+                or Dolmen</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Cairn')">Cairn</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Cave or Rock Shelter')">Cave or Rock
+                Shelter</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Chambered Tomb')">Chambered
+                Tomb</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Hillfort')">Hillfort</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Holed Stone')">Holed Stone</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Misc Earthwork')">Misc
+                Earthwork</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Modern Stone Circle etc')">Modern Stone
+                Circle etc</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Museum')">Museum</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Rock Art')">Rock Art</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Round Barrow s')">Round Barrow
+                s</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Round Cairn')">Round Cairn</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Sculptured Stone')">Sculptured
+                Stone</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Standing Stone Menhir')">Standing Stone
+                Menhir</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Standing Stones')">Standing
+                Stones</ion-button>
+            <ion-button slot="content" size="small" (click)="onToggleLayer('Stone Circle')">Stone Circle</ion-button>
+        </ion-accordion>
+
+    </ion-accordion-group>
+
+    <!--
+        <ion-accordion class="positionbutton">
+            <ion-item slot="header" color="light">
+                <ion-label>Layers</ion-label>
+            </ion-item>
+            
+        </ion-accordion>
+    </ion-accordion-group>
+-->
+
+
+    <div class="map match-parent" id="map" style="color: black;"></div>
+
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="Ionicfablist">
+        <ion-fab-button>
+            <ion-icon src="./assets/ionicons.designerpack/add-outline.svg"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+
+            <ion-fab-button *ngIf="isLoggedIn" (click)="goToProfile()" color="primary">
+                <ion-icon size="large" src="./assets/ionicons.designerpack/copy.svg">Profile</ion-icon>
             </ion-fab-button>
-            <ion-fab-list side="top">
-                <ion-fab-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()" color="primary">
-                    <ion-icon src="./assets/ionicons.designerpack/logo-google.svg">Login</ion-icon>
-                </ion-fab-button>
 
-                <ion-fab-button *ngIf="isLoggedIn" (click)="logout()" color="primary">
-                    <ion-icon size="large" src="./assets/ionicons.designerpack/log-out-outline.svg">Logout</ion-icon>
-                </ion-fab-button>
-            </ion-fab-list>
-        </ion-fab>
-    </ion-content>
 
-</div>
 
+            <ion-fab-button *ngIf="!isLoggedIn" (click)="signInWithGoogle()" color="primary">
+                <ion-icon src="./assets/ionicons.designerpack/logo-google.svg">Login</ion-icon>
+            </ion-fab-button>
+
+            <ion-fab-button *ngIf="isLoggedIn" (click)="logout()" color="primary">
+                <ion-icon size="large" src="./assets/ionicons.designerpack/log-out-outline.svg">Logout</ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
 
 
 
 
-<ion-button (click)="showNearbyPoints(map)">Show Nearby Points</ion-button>
+</ion-content>
+
+
+
+
+
+
+
+
+
 
 
 
