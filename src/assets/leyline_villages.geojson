@@ -1,0 +1,44 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "LineString",
+        "coordinates": [
+            [
+                8.5709,
+                46.8438
+            ],
+            [
+                7.7221709489822,
+                47.533161034949
+            ],
+            [
+                9.23624,
+                46.7988
+            ],
+            [
+                10.29007,
+                46.88554
+            ],
+            [
+                8.806836,
+                47.219553
+            ],
+            [
+                8.366289,
+                47.002206
+            ],
+            [
+                7.091956,
+                46.961878
+            ],
+            [
+                8.2028,
+                47.31699
+            ]
+        ]
+    },
+    "properties": {
+        "name": "Ancient Settlements Route",
+        "description": "A line connecting various ancient settlements in Switzerland"
+    }
+}

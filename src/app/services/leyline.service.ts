@@ -15,6 +15,12 @@ export class LeylineService {
     this.map = map;
   }
 
+  moveLayerToTop(layerId: string) {
+    if (this.map && this.map.getLayer(layerId)) {
+      this.map.moveLayer(layerId);
+    }
+  }
+
   loadGeojson(filename: string) {
     return this.http.get(`assets/Geojsons/${filename}`).pipe(
       map((geojson: any) => {
@@ -38,8 +44,8 @@ export class LeylineService {
         'line-cap': 'round'
       },
       paint: {
-        'line-color': '#888',
-        'line-width': 800
+        'line-color': '#ff0000',
+        'line-width': 80
       }
     });
   }

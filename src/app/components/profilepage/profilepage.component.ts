@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+
 @Component({
   standalone: true,
   imports: [IonicModule, HttpClientModule, CommonModule, RouterLink,],
@@ -13,12 +14,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./profilepage.component.scss'],
 })
 export class ProfilepageComponent implements OnInit {
+  loaded = false;
+  name: string;
+  email: string;
+
+  constructor(
+    private router: Router,
+
+  ) {
+    this.name = '';
+    this.email = '';
+  }
+
   goToMap() {
     this.router.navigate(['/map']);
   }
-  constructor(private router: Router) { }
 
-  ngOnInit() { }
+
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.loaded = true;
+    }, 2000);
+  }
 
 }
 

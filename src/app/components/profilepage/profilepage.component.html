@@ -4,9 +4,25 @@
       <ion-title label>Profilepage</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card>
+  <ion-card class="large-card" *ngIf="!loaded">
+    <ion-card-content>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="large-card" *ngIf="loaded">
     <ion-card-header>
-      <ion-card-title>Profile</ion-card-title>
+      <ion-avatar slot="start">
+        <img src="path_to_your_image">
+      </ion-avatar>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
@@ -20,5 +36,6 @@
       <ion-button>Update</ion-button>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="goToMap()" src="./assets/ionicons.designerpack/arrow-undo-outline.svg">Back</ion-button>
+  <ion-button (click)="goToMap()" src="./assets/ionicons.designerpack/arrow-undo-outline.svg" class="right-align"
+    vertical="bottom">Back</ion-button>
 </ion-content>
