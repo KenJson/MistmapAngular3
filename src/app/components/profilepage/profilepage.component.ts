@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ProfilepageComponent implements OnInit {
   loaded = false;
   name: string;
   email: string;
+  imageUrl: string | undefined;
 
   constructor(
     private router: Router,
@@ -24,13 +26,22 @@ export class ProfilepageComponent implements OnInit {
   ) {
     this.name = '';
     this.email = '';
+    this.imageUrl = '';
   }
 
   goToMap() {
     this.router.navigate(['/map']);
   }
 
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri
+    });
 
+    this.imageUrl = image.webPath;
+  }
 
   ngOnInit() {
     setTimeout(() => {

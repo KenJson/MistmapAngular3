@@ -1,25 +1,28 @@
-import { Component, OnInit, Query } from '@angular/core';
+// Angular imports
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { RouterOutlet, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+// Third-party imports
 import mapboxgl from 'mapbox-gl';
 import { IonicModule } from '@ionic/angular';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
+import { Auth, authState, user } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
+
+// Application imports
+import { environment } from '../../../environments/environment';
 import { MapboxkeyService } from '../../services/mapboxkey.service';
 import { MapLayerService } from '../../services/maplayer.service';
 import { MapboxCtrlsService } from '../../services/mapbox-ctrls.service';
 import { RadiusService } from '../../services/radius.service';
 import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
-import { HttpClient } from '@angular/common/http';
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { RouterOutlet } from '@angular/router';
-import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
-import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
-import { Auth, authState, user } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import { LayerToggleService } from '../../services/layer-toggle.service';
 import { LeylineService } from '../../services/leyline.service';
-
 
 
 /*
@@ -144,6 +147,7 @@ export class MapboxComponent implements OnInit {
 
     });
   }
+
   private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
 
 
@@ -371,15 +375,11 @@ const datas = collectionData(q, { idField: 'id' });
     this.layerToggleService.toggleLayerVisibility(this.map, name);
   }
 
-
-
   moveLayerToTop(layerId: string) {
     if (this.map && this.map.getLayer(layerId)) {
       this.map.moveLayer(layerId);
     }
   }
-
-
 
   ngOnDestroy() {
     if (this.map) {

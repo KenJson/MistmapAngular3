@@ -23,16 +23,16 @@ const takePicture = async () => {
 })
 export class CameraAvatar {
   title = 'capacitorDemo';
+  imageUrl: string | undefined;
 
   async takePicture() {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
-      resultType: CameraResultType.Uri
+      resultType: CameraResultType.DataUrl
     });
 
-    var imageUrl = image.webPath;
-    console.log(imageUrl);
-
+    this.imageUrl = image.dataUrl;
+    console.log(this.imageUrl);
   }
 }

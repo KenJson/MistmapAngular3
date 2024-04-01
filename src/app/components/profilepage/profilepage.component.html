@@ -20,8 +20,9 @@
   </ion-card>
   <ion-card class="large-card" *ngIf="loaded">
     <ion-card-header>
+      <ion-button (click)="takePicture()">select a picture</ion-button>
       <ion-avatar slot="start">
-        <img src="path_to_your_image">
+        <img [src]="imageUrl">
       </ion-avatar>
     </ion-card-header>
     <ion-card-content>
