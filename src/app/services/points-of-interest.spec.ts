@@ -11,7 +11,7 @@ import { PointsWithinRadiusPipe } from '../pipes/points-within-radius.pipe';
 export class GeoJsonService {
   constructor(private http: HttpClient, private mapLayerService: MapLayerService, private pointsWithinRadiusPipe: PointsWithinRadiusPipe) { }
 
-  getNearbyPoints(center: { lat: number, lng: number }): Observable<any> {
+  public getNearbyPoints(center: { lat: number, lng: number }): Observable<any> {
     return this.mapLayerService.getManifest().pipe(
       map(manifestEntries => manifestEntries.map(entry => `assets/Geojsons/${entry.geojson}`)),
       switchMap(urls => forkJoin(urls.map(url => this.http.get(url).pipe(
