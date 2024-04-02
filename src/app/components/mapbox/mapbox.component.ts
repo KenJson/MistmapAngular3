@@ -23,7 +23,7 @@ import { RadiusService } from '../../services/radius.service';
 import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
 import { LayerToggleService } from '../../services/layer-toggle.service';
 import { LeylineService } from '../../services/leyline.service';
-import { PointsOfInterestService } from '../../services/points-of-interest';
+import { PointsOfInterestService } from '../../services/points-of-interest.service';
 
 
 /*
@@ -86,70 +86,6 @@ export class MapboxComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  /* Original function before reactoring
-    showNearbyPoints(map: mapboxgl.Map | undefined) {
-      if (!map) {
-        console.error('Map is not initialized');
-        return;
-      }
-  
-      navigator.geolocation.getCurrentPosition((position) => {
-        const center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-  
-        // Get the list of points from your MapLayerService
-        this.mapLayerService.getManifest().subscribe(manifestEntries => {
-          // For each entry in the manifest, load the corresponding GeoJSON file
-          manifestEntries.forEach((entry, index) => {
-  
-            const url = `assets/Geojsons/${entry.geojson}`;
-  
-  
-            // Load the GeoJSON file
-            this.http.get(url).subscribe((geojson: any) => {
-              // Add the points from the GeoJSON file to the points array
-              this.points.push(...geojson.features
-                .filter((feature: any) => {
-                  // Add your filter condition here
-  
-                  return feature.properties && feature.properties.name === 'Ancient Village or Settlement';
-                })
-  
-                .map((feature: any) => ({
-                  lat: feature.geometry.coordinates[1],
-                  lng: feature.geometry.coordinates[0],
-                  name: feature.properties ? feature.properties.Name : 'Unknown'
-                })));
-  
-              // Get the points within the radius
-              const pointsWithinRadius = this.pointsWithinRadiusPipe.transform(this.points, center, 10);
-              console.log(this.points, pointsWithinRadius);
-  
-              const pointsList = pointsWithinRadius.map(point => `<li>${point.name}</li>`).join('');
-  
-  
-  
-              if (pointsList.length > 0) {
-  
-                new mapboxgl.Popup()
-                  .setLngLat(center)
-                  .setHTML(`<ul>${pointsList}</ul>`)
-                  .addTo(map);
-              } else {
-                console.log('No points within the radius');
-              }
-            });
-          });
-  
-  
-  
-        });
-  
-      });
-    }
-  */
 
 
   showNearbyPoints(map: mapboxgl.Map | undefined) {
@@ -201,7 +137,7 @@ export class MapboxComponent implements OnInit {
     return layerId;
   }
 
-  //Firebase Authentification (checker si le pack est bien installé. problème avec collection.json introuvable)
+
   async signInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
     const credential = await signInWithPopup(this._auth, provider);
