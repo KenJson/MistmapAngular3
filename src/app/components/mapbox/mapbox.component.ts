@@ -25,19 +25,6 @@ import { LayerToggleService } from '../../services/layer-toggle.service';
 import { LeylineService } from '../../services/leyline.service';
 import { PointsOfInterestService } from '../../services/points-of-interest.service';
 
-
-/*
-// ts-ignore pour éviter l'erreur de compilation
-// @ts-ignore
- 
-import { IonIcon2 } from 'ionicons';
-import { addIcons } from 'ionicons/icons';
-mapbox ctrls executé deux fois potentiellement
-*/
-
-//TODO: Régler MapboxDirections. Pas de DefinitlyTyped pour cette librairie apparamment. Ne pas oublier de régler mapbox-ctrls.service.ts également
-// récup package.json et faire un npm install (récup liste des dépendances) (dependencies et devDependencies)
-
 //TODO: Profil personnel , avec caméra avatar (camera existe), avec enregistrement de points favoris, achievments 
 //(faire un guard qu'on met sur le routeur pour vérifier si l'utilisateur est connecté)
 //TODO: Lignes telluriques, anomalies gravit + electromagn. (extra layers. a faire en dernier)
@@ -165,15 +152,7 @@ const datas = collectionData(q, { idField: 'id' });
 }
 */
 
-  private firebaseConfig = {
-    apiKey: "AIzaSyBqHkgxgreoLEV3A_lk6NnSVpnHb82qKiY",
-    authDomain: "mistmap-angu.firebaseapp.com",
-    projectId: "mistmap-angu",
-    storageBucket: "mistmap-angu.appspot.com",
-    messagingSenderId: "1035644163878",
-    appId: "1:1035644163878:web:b96e8f2b415ebcf01cd3e7",
-    measurementId: "G-GGHJLRSPJ0"
-  };
+
 
   ngOnInit() {
     mapboxgl.accessToken = this.mapboxKeyService.getMapboxKey();
@@ -191,7 +170,7 @@ const datas = collectionData(q, { idField: 'id' });
     });
 
     this.leylineService.setMap(this.map);
-    const app = initializeApp(this.firebaseConfig);
+    const app = initializeApp(environment.firebase);
     const analytics = getAnalytics(app);
     this.mapboxCtrlsService.addNavigationControl(this.map, 'top-right');
     this.mapboxCtrlsService.addGeolocateControl(this.map, 'top-right');
