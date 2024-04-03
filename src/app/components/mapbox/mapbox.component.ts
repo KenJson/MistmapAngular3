@@ -1,7 +1,7 @@
 // Angular imports
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { RouterOutlet, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -19,8 +19,8 @@ import { environment } from '../../../environments/environment';
 import { MapboxkeyService } from '../../services/mapboxkey.service';
 import { MapLayerService } from '../../services/maplayer.service';
 import { MapboxCtrlsService } from '../../services/mapbox-ctrls.service';
-import { RadiusService } from '../../services/radius.service';
-import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
+//import { RadiusService } from '../../services/radius.service';
+//import { PointsWithinRadiusPipe } from '../../pipes/points-within-radius.pipe';
 import { LayerToggleService } from '../../services/layer-toggle.service';
 import { LeylineService } from '../../services/leyline.service';
 import { PointsOfInterestService } from '../../services/points-of-interest.service';
@@ -65,16 +65,16 @@ export class MapboxComponent implements OnInit {
   isLoggedIn: boolean = false;
   public loaded = false;
 
-
-  private points: { lat: number, lng: number, name: string }[] = [];
-  private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
-
+  /*
+    private points: { lat: number, lng: number, name: string }[] = [];
+    private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
+  */
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private mapboxKeyService: MapboxkeyService,
     private mapLayerService: MapLayerService,
     private mapboxCtrlsService: MapboxCtrlsService,
-    private radiusService: RadiusService,
+    //private radiusService: RadiusService,
     private readonly _firestore: Firestore,
     private readonly _auth: Auth,
     private router: Router,
