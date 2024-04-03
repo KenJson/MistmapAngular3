@@ -55,7 +55,6 @@ interface Point {
 })
 
 
-
 export class MapboxComponent implements OnInit {
 
   map?: mapboxgl.Map | undefined;
@@ -68,11 +67,27 @@ export class MapboxComponent implements OnInit {
 
 
   private points: { lat: number, lng: number, name: string }[] = [];
+  private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
+
+  constructor(
+    private http: HttpClient,
+    private mapboxKeyService: MapboxkeyService,
+    private mapLayerService: MapLayerService,
+    private mapboxCtrlsService: MapboxCtrlsService,
+    private radiusService: RadiusService,
+    private readonly _firestore: Firestore,
+    private readonly _auth: Auth,
+    private router: Router,
+    private layerToggleService: LayerToggleService,
+    private leylineService: LeylineService,
+    private pointsOfInterestService: PointsOfInterestService,
+
+  ) { }
+
 
   goToProfile() {
     this.router.navigate(['/profile']);
   }
-
 
 
   showNearbyPoints(map: mapboxgl.Map | undefined) {
@@ -103,24 +118,6 @@ export class MapboxComponent implements OnInit {
   }
 
 
-  private pointsWithinRadiusPipe = new PointsWithinRadiusPipe();
-
-
-  constructor(
-    private http: HttpClient,
-    private mapboxKeyService: MapboxkeyService,
-    private mapLayerService: MapLayerService,
-    private mapboxCtrlsService: MapboxCtrlsService,
-    private radiusService: RadiusService,
-    private readonly _firestore: Firestore,
-    private readonly _auth: Auth,
-    private router: Router,
-    private layerToggleService: LayerToggleService,
-    private leylineService: LeylineService,
-    private pointsOfInterestService: PointsOfInterestService,
-
-  ) { }
-
   getIconNameForLayer(layerId: string): string {
     return layerId;
   }
@@ -138,8 +135,6 @@ export class MapboxComponent implements OnInit {
   }
 
 
-
-
   /*
 //gestion des données avec Cloud Firestore
 @param uid
@@ -152,7 +147,6 @@ const query: Query = query(fbCollection, isTodo, byUserId, limitTo);
 const datas = collectionData(q, { idField: 'id' });
 }
 */
-
 
 
   ngOnInit() {

@@ -14,6 +14,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
   templateUrl: './profilepage.component.html',
   styleUrls: ['./profilepage.component.scss'],
 })
+
 export class ProfilepageComponent implements OnInit {
   loaded = false;
   name: string;

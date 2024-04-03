@@ -45,11 +45,6 @@ export class MapLayerService {
     map.on('load', () => {
 
 
-      this.addSource(map, 'earthquakes', 'geojson', 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson');
-      this.addLayer(map, 'earthquakes-layer', 'line', 'earthquakes', {
-        'line-width': 2,
-        'line-color': 'red',
-      });
 
 
     });
