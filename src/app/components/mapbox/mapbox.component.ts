@@ -117,7 +117,8 @@ export class MapboxComponent implements OnInit {
     private router: Router,
     private layerToggleService: LayerToggleService,
     private leylineService: LeylineService,
-    private pointsOfInterestService: PointsOfInterestService
+    private pointsOfInterestService: PointsOfInterestService,
+
   ) { }
 
   getIconNameForLayer(layerId: string): string {
